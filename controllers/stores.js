@@ -18,16 +18,25 @@ router.get('/search', function (req, res) {
     };
 
     axios.get(apiUrl, {headers} ).then( function(response) {
-        res.json(response.data)
+        let shopData = response.data
+        res.render('stores/map', { shopData })
     }).catch(function(error) {
         res.json(error);
     });
-    
 });
 
 //GET /search/:id - show an individual result from the location
 router.get('/search/:id', function (req, res) {
-    //show just one of the results from the map?
+    let store = parseInt(req.params.id)
+    let apiUrl = 'https://api.ravelry.com/shops/' + store + '.json?include=schedules'
+    let headers = {
+        'Authorization': 'Basic ' + Buffer.from(`${process.env.APIUSER}:${process.env.APIPASS}`).toString('base64')
+    };
+
+    axios.get(apiUrl, {headers} ).then( function(response) {
+        let shopData = response.data
+        res.render('stores/show', { shopData })
+    });
 });
 
 //POST /search - add to go-to list

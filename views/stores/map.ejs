@@ -1,1 +1,5 @@
 <h1>Here will be a lovely map and list of stores you may want to visit</h1>
+
+<% shopData.shops.forEach(function (shop) { %>
+    <p><a href="search/<%= shop.id %>"><%= shop.name %></a></p>
+<% }); %>
