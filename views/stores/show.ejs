@@ -4,9 +4,12 @@
 
 <p><%= shopData.shop.phone %></p>
 
-
 <% shopData.schedules.forEach (function (day) { %>
     <% if (!day.closed && day.opening_time) { %>
         <p><%= day.day_name %> -- <%= day.opening_time.split(' ')[1] %> - <%= day.closing_time.split(' ')[1] %></p>
     <% } %>
 <% });%>
+
+<form action="/stores/add/<%= shopData.shop.id %>" method="POST">
+    <input type="submit" value="Add to my list">
+</form>

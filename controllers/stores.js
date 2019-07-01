@@ -40,5 +40,8 @@ router.get('/search/:id', function (req, res) {
 });
 
 //POST /search - add to go-to list
+router.post('/add/:id', function (req, res) {
+    console.log(req.params.id)
+});
 
 module.exports = router;
