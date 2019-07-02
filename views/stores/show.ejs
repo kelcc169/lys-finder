@@ -1,15 +1,28 @@
 <h1><%= shopData.shop.name %></h1>
 
-<h2>Address: <%= shopData.shop.address %>, <%= shopData.shop.city %> <%= shopData.shop.state.name %></h2>
-
+<h3>Contact Information</h3>
+<p><%= shopData.shop.address %></p>
+<p><%= shopData.shop.city %>, <%= shopData.shop.state.name %></p>
 <p><%= shopData.shop.phone %></p>
+<p><a href="<%= shopData.shop.url %>"><%= shopData.shop.url %></a></p>
 
-<% shopData.schedules.forEach (function (day) { %>
-    <% if (!day.closed && day.opening_time) { %>
-        <p><%= day.day_name %> -- <%= day.opening_time.split(' ')[1] %> - <%= day.closing_time.split(' ')[1] %></p>
-    <% } %>
-<% });%>
+<h3>Hours</h3>
+<% if (shopData.schedules.length > 0) {%>
+    <% shopData.schedules.forEach (function (day) { %>
+        <% if (!day.closed && day.opening_time) { %>
+            <p><%= day.day_name %> -- <%= day.opening_time.split(' ')[1] %> - <%= day.closing_time.split(' ')[1] %></p>
+        <% } %>
+    <% });%>
+<% } else { %>
+    <p>Contact store for information</p>
+<% }; %>
+
+
 
 <form action="/stores/add/<%= shopData.shop.id %>" method="POST">
+    <input hidden name="name" value="<%= shopData.shop.name %>">
+    <input hidden name="city" value="<%= shopData.shop.city %>">
+    <input hidden name="state" value="<%= shopData.shop.state.name %>">
+    <input hidden name="ravId" value="<%= shopData.shop.id %>">
     <input type="submit" value="Add to my list">
 </form>
