@@ -1,8 +1,7 @@
 <h1><%= shopData.shop.name %></h1>
 
 <h3>Contact Information</h3>
-<p><%= shopData.shop.address %></p>
-<p><%= shopData.shop.city %>, <%= shopData.shop.state.name %></p>
+<p><%= shopData.shop.location %></p>
 <p><%= shopData.shop.phone %></p>
 <p><a href="<%= shopData.shop.url %>"><%= shopData.shop.url %></a></p>
 
@@ -16,9 +15,9 @@
 <% } else { %>
     <p>Contact store for information</p>
 <% }; %>
-
-
-
+<br />
+<%- shopData.shop.notes_html %>
+<br />
 <form action="/stores/add/<%= shopData.shop.id %>" method="POST">
     <input hidden name="name" value="<%= shopData.shop.name %>">
     <input hidden name="city" value="<%= shopData.shop.city %>">
@@ -26,3 +25,4 @@
     <input hidden name="ravId" value="<%= shopData.shop.id %>">
     <input type="submit" value="Add to my list">
 </form>
+

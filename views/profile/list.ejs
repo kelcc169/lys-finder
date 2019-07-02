@@ -1,7 +1,14 @@
-<h1>Here's the list of places to go, maybe with some sort of search bar in case I'm an ambitious bean</h1>
+<h2>Saved Places</h2>
 
-<h2> OR </h2>
+<% locations.forEach(function(location) { %>
+    <% if (location.usersLocations.visited === false) { %>
+        <p><%= location.name %></p>
+    <% } %>
+<% }); %>
+<h2>Places You've Been</h2>
 
-<h1>i've been to these places woo. defs want a search bar, i've been to so many. or pagination or something</h1>
-
-<p>fill this page based on whether i'm looking for want-to-go or been, boolean in usersLocations table</p>
+<% locations.forEach(function(location) { %>
+    <% if (location.usersLocations.visited !== false) { %>
+        <p><%= location.name %></p>
+    <% } %>
+<% }); %>
