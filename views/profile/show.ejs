@@ -20,7 +20,7 @@
 <br />
 
 <h3>Add A Note</h3>
-<form action="/profile/note" method="POST">
+<form action="/profile/<%= shopData.shop.id %>/notes" method="POST">
     <input type="text" name="content" placeholder="note">
     <input hidden name="locationId" placeholder="">
     <input type="submit" value="Save Note">

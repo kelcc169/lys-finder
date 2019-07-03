@@ -73,9 +73,7 @@ router.post('/add/:id', function (req, res) {
                     visited: false
                 }
             }).then(function (shop) {
-            // user.addLocation(shop).then(function (data){
                 console.log(shop)
-                // redirect me!
                 res.redirect('/profile')
             });
         }).catch(function (error) {

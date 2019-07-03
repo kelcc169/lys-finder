@@ -10,11 +10,10 @@ router.get('/', function (req, res) {
     res.render('profile/index')
 });
 
-//GET /list - show list of stores user wants to go to
+//GET /list - show list of stores user has saved
 router.get('/list', function (req, res) {
     db.user.findByPk(req.user.id).then(function (user) {
         user.getLocations().then(function (locations) {
-            console.log(locations)
             res.render('profile/list', { locations })
         });
     });
@@ -35,17 +34,28 @@ router.get('/:id', function (req, res) {
 });
 
 // POST /notes - add note to location record
-router.post('/note', function (req, res) {
-    db.
-    
-    db.note.create({
-        date: req.body.date,
-        content: req.body.content
-    }).then(function (data) {
-        res.send(data)
-    }).catch(function (error) {
-        res.send(error)
-    });
+router.post('/:id/notes', function (req, res) {
+    //find location
+    let ravId = parseInt(req.params.id);
+    db.location.findOne({
+        where: {ravId: ravId}
+    }).then( function(location) {
+        db.usersLocations.findOne({
+            where: {
+                locationId: location.id,
+                userId: req.user.id
+            }
+        }).then( function(userLoc) {
+            db.note.create({
+                content: req.body.content,
+                usersLocationsId: userLoc.id
+            }).then(function (data) {
+                res.send('we did it!')
+            }).catch( function (error) {
+                res.send(error)
+            })
+        })
+    })
 });
 
 // PUT /notes - update/edit notes
