@@ -21,15 +21,36 @@ router.get('/list', function (req, res) {
 
 //GET /:id - show your one store and all its notes
 router.get('/:id', function (req, res) {
-    let store = parseInt(req.params.id)
-    let apiUrl = 'https://api.ravelry.com/shops/' + store + '.json?include=schedules+brands'
+    let ravId = parseInt(req.params.id)
+    let apiUrl = 'https://api.ravelry.com/shops/' + ravId + '.json?include=schedules'
     let headers = {
         'Authorization': 'Basic ' + Buffer.from(`${process.env.APIUSER}:${process.env.APIPASS}`).toString('base64')
     };
 
-    axios.get(apiUrl, {headers} ).then( function(response) {
-        let shopData = response.data
-        res.render('profile/show', { shopData })
+    //find usersLocations
+    db.location.findOne({
+        where: {ravId: ravId}
+    }).then( function (location) {
+        db.favorite.findOne({
+            where: {
+                locationId: location.id,
+                userId: req.user.id
+            }
+            //find notes with usersLocsId
+        }).then(function (favorite) {
+            console.log(favorite)
+            db.comment.findAll({
+                where: {
+                    favoriteId: favorite.id
+                }
+            }).then( function (comments) {
+                console.log(comments)
+                axios.get(apiUrl, {headers} ).then( function(response) {
+                    let shopData = response.data
+                    res.render('profile/show', { shopData, comments })
+                })
+            })
+        })
     });
 });
 
@@ -40,17 +61,17 @@ router.post('/:id/notes', function (req, res) {
     db.location.findOne({
         where: {ravId: ravId}
     }).then( function(location) {
-        db.usersLocations.findOne({
+        db.favorite.findOne({
             where: {
                 locationId: location.id,
                 userId: req.user.id
             }
-        }).then( function(userLoc) {
-            db.note.create({
+        }).then( function(favorite) {
+            db.comment.create({
                 content: req.body.content,
-                usersLocationsId: userLoc.id
+                favoriteId: favorite.id
             }).then(function (data) {
-                res.send('we did it!')
+                res.redirect('/profile/' + ravId)
             }).catch( function (error) {
                 res.send(error)
             })

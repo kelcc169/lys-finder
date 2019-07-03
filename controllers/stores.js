@@ -56,30 +56,27 @@ router.get('/search/:id', function (req, res) {
 
 //POST /search - add to go-to list
 router.post('/add/:id', function (req, res) {
-    // find the user
-    db.user.findByPk(req.user.id).then(function (user) {
-        db.location.findOrCreate({
+    db.location.findOrCreate({
+        where: {
+            name: req.body.name,
+            city: req.body.city,
+            state: req.body.state,
+            ravId: req.body.ravId
+        }
+    }).spread(function (store, created) {
+        db.favorite.findOrCreate({
             where: {
-                name: req.body.name,
-                city: req.body.city,
-                state: req.body.state,
-                ravId: req.body.ravId
+                userId: req.user.id,
+                locationId: store.id,
+                visited: false
             }
-        }).spread(function (store, created) {
-            db.usersLocations.findOrCreate({
-                where: {
-                    userId: req.user.id,
-                    locationId: store.id,
-                    visited: false
-                }
-            }).then(function (shop) {
-                console.log(shop)
-                res.redirect('/profile')
-            });
-        }).catch(function (error) {
-            res.send(error);
-        });  
-    });
+        }).then(function (shop) {
+            console.log(shop)
+            res.redirect('/profile')
+        });
+    }).catch(function (error) {
+        res.send(error);
+    });  
 });
 
 //DELETE /:id - remove a store from your list

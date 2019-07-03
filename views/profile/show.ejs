@@ -17,9 +17,14 @@
 <% }; %>
 <br />
 <% shopData.shop.notes_html %>
-<br />
 
-<h3>Add A Note</h3>
+<h3>Your comments on this place!</h3>
+<% comments.forEach(function (comment) { %>
+    <p><%= comment.content %></p>
+<% }); %>
+
+
+<h3>Add A Comment!</h3>
 <form action="/profile/<%= shopData.shop.id %>/notes" method="POST">
     <input type="text" name="content" placeholder="note">
     <input hidden name="locationId" placeholder="">

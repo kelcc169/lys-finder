@@ -1,14 +1,14 @@
 <h2>Saved Places</h2>
 
 <% locations.forEach(function(location) { %>
-    <% if (location.usersLocations.visited === false) { %>
+    <% if (location.favorite.visited === false) { %>
         <p><a href="../profile/<%= location.ravId %>"><%= location.name %></a></p>
     <% } %>
 <% }); %>
 <h2>Places You've Been</h2>
 
 <% locations.forEach(function(location) { %>
-    <% if (location.usersLocations.visited !== false) { %>
+    <% if (location.favorite.visited !== false) { %>
         <p><a href="../profile/<%= location.ravId %>"><%= location.name %></a></p>
     <% } %>
 <% }); %>
