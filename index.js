@@ -30,6 +30,7 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(ejsLayouts);
+app.set('layout extractScripts', true)
 app.use(helmet());
 
 // Configures express-session middleware

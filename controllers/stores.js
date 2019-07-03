@@ -39,17 +39,17 @@ router.get('/search', function (req, res) {
     });
 });
 
+// TODO change route to just be store and id
 //GET /search/:id - show an individual result from the location
 router.get('/search/:id', function (req, res) {
     let store = parseInt(req.params.id)
-    let apiUrl = 'https://api.ravelry.com/shops/' + store + '.json?include=schedules'
+    let apiUrl = 'https://api.ravelry.com/shops/' + store + '.json?include=schedules+brands'
     let headers = {
         'Authorization': 'Basic ' + Buffer.from(`${process.env.APIUSER}:${process.env.APIPASS}`).toString('base64')
     };
 
     axios.get(apiUrl, {headers} ).then( function(response) {
         let shopData = response.data
-        console.log(shopData)
         res.render('stores/show', { shopData })
     });
 });
@@ -72,16 +72,18 @@ router.post('/add/:id', function (req, res) {
                     locationId: store.id,
                     visited: false
                 }
-            }).then(function (data) {
+            }).then(function (shop) {
             // user.addLocation(shop).then(function (data){
                 console.log(shop)
                 // redirect me!
-                res.send('we did something!')
+                res.redirect('/profile')
             });
         }).catch(function (error) {
             res.send(error);
         });  
     });
 });
+
+//DELETE /:id - remove a store from your list
 
 module.exports = router;

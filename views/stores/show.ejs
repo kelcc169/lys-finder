@@ -18,6 +18,8 @@
 <br />
 <%- shopData.shop.notes_html %>
 <br />
+
+<br />
 <form action="/stores/add/<%= shopData.shop.id %>" method="POST">
     <input hidden name="name" value="<%= shopData.shop.name %>">
     <input hidden name="city" value="<%= shopData.shop.city %>">

@@ -2,13 +2,13 @@
 
 <% locations.forEach(function(location) { %>
     <% if (location.usersLocations.visited === false) { %>
-        <p><%= location.name %></p>
+        <p><a href="../profile/<%= location.ravId %>"><%= location.name %></a></p>
     <% } %>
 <% }); %>
 <h2>Places You've Been</h2>
 
 <% locations.forEach(function(location) { %>
     <% if (location.usersLocations.visited !== false) { %>
-        <p><%= location.name %></p>
+        <p><a href="../profile/<%= location.ravId %>"><%= location.name %></a></p>
     <% } %>
 <% }); %>
