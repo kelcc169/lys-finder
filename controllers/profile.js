@@ -2,8 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const db = require('../models')
+const methodOverride = require('method-override');
 
 const router = express.Router();
+
+router.use(methodOverride('_method'));
 
 //GET / - show your name, click to go to lists for visited/want to visit
 router.get('/', function (req, res) {
@@ -79,8 +82,47 @@ router.post('/:id/notes', function (req, res) {
     })
 });
 
-// PUT /notes - update/edit notes
+// PUT /profile/:id - update store to "visited"
+router.put('/:id', function (req, res) {
+    let ravId = parseInt(req.params.id);
 
-// DELETE /notes
+    //find record in favorites
+    db.location.findOne({
+        where: {
+            ravId: ravId
+        }
+    }).then(function (location) {
+        db.favorite.update({
+            visited: true
+        }, {
+            where: {
+                locationId: location.id,
+                userId: req.user.id
+            }
+        }).then( function (data) {
+            res.redirect('/profile/list')
+        });
+    });
+});
+
+// DELETE /profile/:id - remove store from your favorites
+router.delete('/:id', function (req, res) {
+    let ravId = parseInt(req.params.id);
+
+    db.location.findOne({
+        where: {
+            ravId: ravId
+        }
+    }).then(function (location) {
+        db.favorite.destroy({
+            where: {
+                locationId: location.id,
+                userId: req.user.id
+            }
+        }).then(function (data) {
+            res.redirect('/profile/list')
+        })
+    })
+});
 
 module.exports = router;

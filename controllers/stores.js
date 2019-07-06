@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 
 //GET - /search show 
 router.get('/search', function (req, res) {
-    let location = req.query.city + ',' + req.query.state
+    let location = req.query.city
     geocodingClient.forwardGeocode({
         query: location
     }).send().then(function (response) {
@@ -78,7 +78,5 @@ router.post('/add/:id', function (req, res) {
         res.send(error);
     });  
 });
-
-//DELETE /:id - remove a store from your list
 
 module.exports = router;

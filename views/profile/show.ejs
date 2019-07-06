@@ -30,3 +30,11 @@
     <input hidden name="locationId" placeholder="">
     <input type="submit" value="Save Note">
 </form>
+
+<form action="/profile/<%= shopData.shop.id %>/?_method=PUT" method="POST">
+    <input type="submit" value="I've visited this store">
+</form>
+
+<form action="/profile/<%= shopData.shop.id %>/?_method=DELETE" method="POST">
+    <input type="submit" value="Remove from list">
+</form>
