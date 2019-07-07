@@ -1,7 +1,66 @@
 #map {
-    width: 400px;
-    height: 300px;
+    width: 60%;
+    height: calc(100% - 90px);
+    margin-bottom: 30px;
+    position: fixed;
 }
+
+#search-controls{ 
+    width: 100%;
+}
+
+#search-input {
+    width: calc(100% - 75px);
+}
+
+.search-input { 
+    position: fixed;
+    z-index: 100;
+    padding: 30px;
+    width: calc(33.3% - 30px);
+    background-color: white;
+}
+
+.hide-footer { 
+    position: fixed;
+    z-index: 100;
+    top: calc(100% - 30px);
+    width: calc(33.3% - 30px);
+    background-color: white;
+    height: 30px;
+}
+
+.search-results { 
+    position: relative; 
+    top: 107px;
+}
+
+p.contact { 
+    margin: 10px 5px;
+}
+
+.day-of-week { 
+    float: left; 
+    text-align: center;
+}
+
+.hours {
+    display: flex;
+    justify-content: space-around;
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+.fa-calendar-check {
+    color: green; 
+}
+
+.fa-calendar-times {
+    color: red;
+}
+
 
 body {
     background-color: lemonchiffon;

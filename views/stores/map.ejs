@@ -1,12 +1,48 @@
-<h1>Here will be a lovely map and list of stores you may want to visit</h1>
-<div id="map">
+<div class="row"> 
+    <div class="col-4">
+        <div class="search-input">
+            <form class="form-inline" action="/stores/search" action="GET">
+                <div class="form-group" id="search-controls">
+                    <input type="text" class="form-control m-2" id="search-input" name="city" placeholder="City, State, Zip...">
+                    <button type="submit" class="btn btn-primary m-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="search-results m-2">
+            <% shopData.shops.forEach(function (shop) { %>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><%= shop.name %></h4>
+                        <div class="links">
+                            <a class="fas fa-link fa-lg" href="<%= shop.url %>"></a>
+                            <a class="far fa-heart fa-lg" href="#"></a>
+                        </div>
+                        <p class="card-text"><%= shop.address %></p>
+                        <a class="card-link" href="search/<%= shop.id %>">Learn More</a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+        <div class="hide-footer"></div>
+        
+    </div>
+    <div class="col-8">
+        <div id="map"></div>
+    </div>
 </div>
 
-<% shopData.shops.forEach(function (shop) { %>
-    <p><a href="search/<%= shop.id %>"><%= shop.name %></a></p>
-<% }); %>
+
+
+
+
+
 
 <script>
     const shops = <%- JSON.stringify(shopData.shops)%>
 </script>
+
 <script src="/js/app.js"></script>
