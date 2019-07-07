@@ -1,15 +1,11 @@
-<h2>Home</h2>
-
-<% if (!currentUser) { %>
-    <a href="/auth/signup">Signup</a>
-    <a href="/auth/login">Login</a>
-<% } else { %>
-    <p>Hello, <%= currentUser.name %></p>
-    <a href="/auth/logout">Logout</a>
-    <a href="/profile">Profile</a>
-<% }; %>
-
-<form action="/stores/search" action="GET">
-    <input type="text" name="city" placeholder="City, State, Zip...">
-    <input type="submit" value="Submit">
-</form>
+<div class="main-search">
+    <form class="form-inline" action="/stores/search" action="GET">
+        <div class="form-group" id="search-controls">
+            <input type="text" class="form-control m-2" id="search-input" name="city" placeholder="City, State, Zip...">
+            <button type="submit" class="btn btn-primary m-2">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <p class="lead">Search your neighborhood for local yarn stores!</p>
+</div>

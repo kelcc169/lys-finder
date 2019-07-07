@@ -1,8 +1,9 @@
 #map {
-    width: 60%;
+    width: calc(66.666667% - 30px);
     height: calc(100% - 90px);
     margin-bottom: 30px;
     position: fixed;
+    top: 69px;
 }
 
 #search-controls{ 
@@ -16,9 +17,9 @@
 .search-input { 
     position: fixed;
     z-index: 100;
-    padding: 30px;
+    padding: 10px 0;
     width: calc(33.3% - 30px);
-    background-color: white;
+    top: 69px;
 }
 
 .hide-footer { 
@@ -26,13 +27,25 @@
     z-index: 100;
     top: calc(100% - 30px);
     width: calc(33.3% - 30px);
-    background-color: white;
     height: 30px;
+}
+
+.main-search {
+    width: 40%;
+    min-width: 400px;
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.main-search .lead {
+    text-align: center;
 }
 
 .search-results { 
     position: relative; 
-    top: 107px;
+    top: 100px;
 }
 
 p.contact { 
@@ -61,12 +74,11 @@ p.contact {
     color: red;
 }
 
-
-body {
-    background-color: lemonchiffon;
-}
-
 .mapboxgl-popup {
     max-width: 400px;
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin-top: 69px;
 }

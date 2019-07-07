@@ -1,6 +1,6 @@
 <div class="row"> 
     <div class="col-4">
-        <div class="search-input">
+        <div class="search-input bg-light">
             <form class="form-inline" action="/stores/search" action="GET">
                 <div class="form-group" id="search-controls">
                     <input type="text" class="form-control m-2" id="search-input" name="city" placeholder="City, State, Zip...">
@@ -11,9 +11,9 @@
             </form>
         </div>
         
-        <div class="search-results m-2">
+        <div class="search-results mb-5">
             <% shopData.shops.forEach(function (shop) { %>
-                <div class="card">
+                <div class="card m-2">
                     <div class="card-body">
                         <h4 class="card-title"><%= shop.name %></h4>
                         <div class="links">
@@ -27,7 +27,7 @@
             <% }); %>
         </div>
 
-        <div class="hide-footer"></div>
+        <div class="hide-footer bg-light"></div>
         
     </div>
     <div class="col-8">
