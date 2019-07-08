@@ -15,7 +15,7 @@
             <% shopData.shops.forEach(function (shop) { %>
                 <div class="card m-2">
                     <div class="card-body">
-                        <h4 class="card-title"><%= shop.name %></h4>
+                        <h4 class="card-title d-inline-block"><%= shop.name %></h4>
                         <p class="card-subtitle text-muted mb-4"><%= shop.address %></p>
                         <a class="card-link" href="search/<%= shop.id %>">
                             <i class="fas fa-angle-double-right mr-1"></i>Learn More
@@ -23,6 +23,15 @@
                         <a class="card-link" href="<%= shop.url %>" target="blank">
                             <i class="fas fa-link mr-1"></i>Website
                         </a>
+                        <form action="/profile/add/<%= shop.id %>" method="POST" class="heart">
+                            <input hidden name="name" value="<%= shop.name %>">
+                            <input hidden name="city" value="<%= shop.city %>">
+                            <input hidden name="state" value="<%= shop.state.name %>">
+                            <input hidden name="ravId" value="<%= shop.id %>">
+                            <button type="submit" class="btn btn-primary m-2">
+                                <i class="far fa-heart" href="#"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             <% }); %>
