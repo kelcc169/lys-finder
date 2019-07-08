@@ -80,12 +80,13 @@
             </button>
         </form>   
 
-        <form class="float-right m-2" action="/profile/update/<%= shopData.shop.id %>/?_method=PUT" method="POST">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-map-marked mr-2"></i>
-                Visited
-            </button>
-        </form>
-
+        <% if (!favorite.visited) { %>
+            <form class="float-right m-2" action="/profile/update/<%= shopData.shop.id %>/?_method=PUT" method="POST">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-map-marked mr-2"></i>
+                    Visited
+                </button>
+            </form>
+        <% }; %>
     </div> 
 </footer>

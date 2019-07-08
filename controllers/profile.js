@@ -25,7 +25,6 @@ router.get('/:id', function (req, res) {
         'Authorization': 'Basic ' + Buffer.from(`${process.env.APIUSER}:${process.env.APIPASS}`).toString('base64')
     };
 
-    //find usersLocations
     db.location.findOne({
         where: {ravId: ravId}
     }).then( function (location) {
@@ -34,21 +33,18 @@ router.get('/:id', function (req, res) {
                 locationId: location.id,
                 userId: req.user.id
             }
-            //find notes with usersLocsId
         }).then(function (favorite) {
-            console.log(favorite)
             db.comment.findAll({
                 where: {
                     favoriteId: favorite.id
                 }
             }).then( function (comments) {
-                console.log(comments)
                 axios.get(apiUrl, {headers} ).then( function(response) {
                     let shopData = response.data
-                    res.render('profile/show', { shopData, comments })
-                })
-            })
-        })
+                    res.render('profile/show', { shopData, comments, favorite })
+                });
+            });
+        });
     });
 });
 
@@ -68,7 +64,6 @@ router.post('/add/:id', function (req, res) {
                 locationId: store.id,
             }
         }).then(function (shop) {
-            console.log(shop)
             res.redirect('/profile')
         });
     }).catch(function (error) {
@@ -96,9 +91,9 @@ router.post('/:id/notes', function (req, res) {
                 res.redirect('/profile/' + ravId)
             }).catch( function (error) {
                 res.send(error)
-            })
-        })
-    })
+            });
+        });
+    });
 });
 
 // PUT /profile/:id - update store to "visited"
@@ -139,8 +134,8 @@ router.delete('/:id', function (req, res) {
             }
         }).then(function (data) {
             res.redirect('/profile/list')
-        })
-    })
+        });
+    });
 });
 
 module.exports = router;
