@@ -44,7 +44,7 @@
             <% }; %>
 
             <hr class="my-4">
-            <form action="/stores/add/<%= shopData.shop.id %>" method="POST">
+            <form action="/profile/add/<%= shopData.shop.id %>" method="POST">
                 <input hidden name="name" value="<%= shopData.shop.name %>">
                 <input hidden name="city" value="<%= shopData.shop.city %>">
                 <input hidden name="state" value="<%= shopData.shop.state.name %>">

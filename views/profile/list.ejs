@@ -1,14 +1,49 @@
-<h2>Saved Places</h2>
+<div class="row">
+    <div class="col-4">
+        <div class="search-input bg-light">
+            <form class="form-inline" action="/stores/search" action="GET">
+                <div class="form-group" id="search-controls">
+                    <input type="text" class="form-control m-2" id="search-input" name="location" placeholder="City, State, Zip...">
+                    <button type="submit" class="btn btn-primary m-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
 
-<% locations.forEach(function(location) { %>
-    <% if (location.favorite.visited === false) { %>
-        <p><a href="../profile/<%= location.ravId %>"><%= location.name %></a></p>
-    <% } %>
-<% }); %>
-<h2>Places You've Been</h2>
+        <div class="search-results">
+            <% locations.forEach(function(location) { %>
+                <% if (!location.favorite.visited) { %>
+                    <div class="card m-2"><p>
+                        <div class="card-body">
+                            <h4 class="card-title"><%= location.name %></h4>
+                            <p class="card-subtitle text-muted mb-2"><%= location.city %>, <%= location.state %></p>
+                            <a href="../profile/<%= location.ravId %>">Store Info</a>
+                        </div>
+                    </div>
+                <% } %>
+            <% }); %>
+        </div>
+    </div>
 
-<% locations.forEach(function(location) { %>
-    <% if (location.favorite.visited !== false) { %>
-        <p><a href="../profile/<%= location.ravId %>"><%= location.name %></a></p>
-    <% } %>
-<% }); %>
+    <div class="col-4">
+        <div class="search-results mb-5">
+            <% locations.forEach(function(location) { %>
+                <% if (location.favorite.visited === true) { %>
+                    <div class="card m-2"><p>
+                        <div class="card-body">
+                            <h4 class="card-title"><%= location.name %></h4>
+                            <p class="card-subtitle text-muted mb-2"><%= location.city %>, <%= location.state %></p>                        
+                            <a href="../profile/<%= location.ravId %>">Store Info</a>
+                        </div>
+                    </div>
+                <% } %>
+            <% }); %>
+        </div>
+    </div>
+
+    <div class="col-4">
+
+    </div>
+</div>
+

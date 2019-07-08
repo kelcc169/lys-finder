@@ -8,13 +8,8 @@ const router = express.Router();
 
 router.use(methodOverride('_method'));
 
-//GET / - show your name, click to go to lists for visited/want to visit
+//GET / - show list of stores user has saved, maybe a map?
 router.get('/', function (req, res) {
-    res.render('profile/index')
-});
-
-//GET /list - show list of stores user has saved
-router.get('/list', function (req, res) {
     db.user.findByPk(req.user.id).then(function (user) {
         user.getLocations().then(function (locations) {
             res.render('profile/list', { locations })
@@ -55,6 +50,30 @@ router.get('/:id', function (req, res) {
             })
         })
     });
+});
+
+//POST /add/:id - add to go-to list
+router.post('/add/:id', function (req, res) {
+    db.location.findOrCreate({
+        where: {
+            name: req.body.name,
+            city: req.body.city,
+            state: req.body.state,
+            ravId: req.body.ravId
+        }
+    }).spread(function (store, created) {
+        db.favorite.findOrCreate({
+            where: {
+                userId: req.user.id,
+                locationId: store.id,
+            }
+        }).then(function (shop) {
+            console.log(shop)
+            res.redirect('/profile')
+        });
+    }).catch(function (error) {
+        res.send(error);
+    });  
 });
 
 // POST /notes - add note to location record

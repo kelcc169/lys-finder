@@ -1,5 +1,5 @@
 <h3>Hello, <%= currentUser.name %></h3>
-
+<h3>NOT THIS PAGE</h3>
 <div class="row">
     <div class="col-4">
         <h2>Saved Places</h2>
@@ -16,9 +16,15 @@
                 <p><a href="../profile/<%= location.ravId %>"><%= location.name %></a></p>
             <% } %>
         <% }); %>
-        
+
     </div>
     <div class="col-8">
-        <p>Map!</p>
+        <div id="map"></div>
     </div>
 </div>
+
+<script>
+    const shops = <%- JSON.stringify(locations)%>
+</script>
+
+<script src="/js/app.js"></script>

@@ -62,10 +62,6 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile');
-});
-
 app.use('/auth', require('./controllers/auth'));
 app.use('/stores', require('./controllers/stores'));
 app.use('/profile', isLoggedIn, require('./controllers/profile'));
