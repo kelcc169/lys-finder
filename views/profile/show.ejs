@@ -1,40 +1,91 @@
-<h1><%= shopData.shop.name %></h1>
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="jumbotron" id="storeinfo">
+            <h1 class="display-4"><%= shopData.shop.name %></h1>
+            <% if (shopData.schedules.length > 0) { %>
+                <hr class="my-4">
+                <div class="hours">
+                    <% shopData.schedules.forEach (function (day) { %>
+                        <div class="day-of-week">
+                            <% if (day.closed) { %>
+                                <i class="fas fa-calendar-times fa-2x"></i>
+                            <% } else { %>
+                                <i class="fas fa-calendar-check fa-2x"></i>
+                            <% } %>
+                            <div><%= day.day_name %></div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <hr class="my-4">
+                <p class="lead">Contact store for daily availablity</p>
+            <% }; %>
 
-<h3>Contact Information</h3>
-<p><%= shopData.shop.location %></p>
-<p><%= shopData.shop.phone %></p>
-<p><a href="<%= shopData.shop.url %>"><%= shopData.shop.url %></a></p>
+            <% if (shopData.shop.notes_html != "") { %>
+                <hr class="my-4">
+                <%- shopData.shop.notes_html %>
+            <% }; %>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead> 
+                    <tr> 
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <form action="/profile/<%= shopData.shop.id %>/notes" class="form-inline" method="POST">
+                                <div class="form-group" id="note-form">
+                                    <input type="text" class="form-control m-2" id="note-input" name="content" placeholder="Enter your note here...">
+                                    <button type="submit" class="btn btn-primary m-2">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <% comments.forEach(function (comment) { %>
+                        <tr>
+                            <td><%= comment.content %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<h3>Hours</h3>
-<% if (shopData.schedules.length > 0) {%>
-    <% shopData.schedules.forEach (function (day) { %>
-        <% if (!day.closed && day.opening_time) { %>
-            <p><%= day.day_name %> -- <%= day.opening_time.split(' ')[1] %> - <%= day.closing_time.split(' ')[1] %></p>
-        <% } %>
-    <% });%>
-<% } else { %>
-    <p>Contact store for information</p>
-<% }; %>
-<br />
-<%- shopData.shop.notes_html %>
+<footer class="footer fixed-bottom bg-light">
+    <div class="container">
+        <p class="text-muted text-center d-inline-block mt-3">
+            <% if (shopData.shop.location != "" && shopData.shop.location != null) { %>
+                <i class="fas fa-thumbtack contact ml-3 mr-2"></i>
+                <%= shopData.shop.location %>
+            <% }; %>
+            <% if (shopData.shop.phone != "" && shopData.shop.phone != null) { %>
+                <i class="fas fa-phone-square-alt contact ml-3 mr-2"></i>
+                <%= shopData.shop.phone %>
+            <% }; %>
+            <% if (shopData.shop.url != "" && shopData.shop.url != null) { %>
+                <i class="fas fa-link contact ml-3 mr-2"></i>
+                <a href="<%= shopData.shop.url %>"> <%= shopData.shop.name %></a>
+            <% }; %>
+        </p>
+        <form class="float-right m-2" action="/profile/<%= shopData.shop.id %>/?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-secondary">
+                <i class="fas fa-heart-broken mr-2"></i>
+                Remove
+            </button>
+        </form>   
 
-<h3>Your comments on this place!</h3>
-<% comments.forEach(function (comment) { %>
-    <p><%= comment.content %></p>
-<% }); %>
+        <form class="float-right m-2" action="/profile/<%= shopData.shop.id %>/?_method=PUT" method="POST">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-map-marked mr-2"></i>
+                Visited
+            </button>
+        </form>
 
-
-<h3>Add A Comment!</h3>
-<form action="/profile/<%= shopData.shop.id %>/notes" method="POST">
-    <input type="text" name="content" placeholder="note">
-    <input hidden name="locationId" placeholder="">
-    <input type="submit" value="Save Note">
-</form>
-
-<form action="/profile/<%= shopData.shop.id %>/?_method=PUT" method="POST">
-    <input type="submit" value="I've visited this store">
-</form>
-
-<form action="/profile/<%= shopData.shop.id %>/?_method=DELETE" method="POST">
-    <input type="submit" value="Remove from list">
-</form>
+    </div> 
+</footer>

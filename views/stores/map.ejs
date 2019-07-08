@@ -16,12 +16,16 @@
                 <div class="card m-2">
                     <div class="card-body">
                         <h4 class="card-title"><%= shop.name %></h4>
-                        <div class="links">
-                            <a class="fas fa-link fa-lg" href="<%= shop.url %>"></a>
-                            <a class="far fa-heart fa-lg" href="#"></a>
-                        </div>
-                        <p class="card-text"><%= shop.address %></p>
-                        <a class="card-link" href="search/<%= shop.id %>">Learn More</a>
+                        <p class="card-subtitle text-muted mb-4"><%= shop.address %></p>
+                        <a class="card-link" href="search/<%= shop.id %>">
+                            <i class="fas fa-angle-double-right mr-1"></i>Learn More
+                        </a>
+                        <a class="card-link" href="<%= shop.url %>" target="blank">
+                            <i class="fas fa-link mr-1"></i>Website
+                        </a>
+                        <a class="card-link" href="#">
+                            <i class="far fa-heart mr-1"></i>Save
+                        </a>
                     </div>
                 </div>
             <% }); %>

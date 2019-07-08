@@ -1,12 +1,9 @@
 <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
-        <div class="jumbotron">
+    <div class="col-12">
+        <div class="jumbotron" id="storeinfo">
             <h1 class="display-4"><%= shopData.shop.name %></h1>
-
-            <% if (shopData.schedules.length > 0) {%>
+            <% if (shopData.schedules.length > 0) { %>
                 <hr class="my-4">
-
                 <div class="hours">
                     <% shopData.schedules.forEach (function (day) { %>
                         <div class="day-of-week">
@@ -17,48 +14,46 @@
                             <% } %>
                             <div><%= day.day_name %></div>
                         </div>
-                    <% });%>
+                    <% }); %>
                 </div>
             <% } else { %>
                 <hr class="my-4">
-                <p class="lead">Contact store for daily availability</p>
+                <p class="lead">Contact store for schedule</p>
             <% }; %>
-            
+
             <hr class="my-4">
 
-            <p class="lead">
-                <i class="fas fa-thumbtack contact"></i>
-                <%= shopData.shop.location %>
-            </p>
-            <p class="lead">
-                <% if (shopData.shop.phone != "") { %>
-                    <i class="fas fa-phone-square-alt contact"></i>
+            <p class="text-muted text-center mt-3">
+                <% if (shopData.shop.location != "" && shopData.shop.location != null) { %>
+                    <i class="fas fa-thumbtack contact ml-3 mr-2"></i>
+                    <%= shopData.shop.location %>
+                <% }; %>
+                <% if (shopData.shop.phone != "" && shopData.shop.phone != null) { %>
+                    <i class="fas fa-phone-square-alt contact ml-3 mr-2"></i>
                     <%= shopData.shop.phone %>
                 <% }; %>
+                <% if (shopData.shop.url != "" && shopData.shop.url != null) { %>
+                    <i class="fas fa-link contact ml-3 mr-2"></i>
+                    <a href="<%= shopData.shop.url %>"> <%= shopData.shop.name %></a>
+                <% }; %>
             </p>
-            <p class="lead">
-                <i class="fas fa-link contact"></i>
-                <a href="<%= shopData.shop.url %>"> <%= shopData.shop.name %></a>
-            </p>
-            
-            <% if (shopData.shop.notes_html != "") { %>
+
+            <% if (shopData.shop.notes_html != "" &&  shopData.shop.notes_html != null) { %>
                 <hr class="my-4">
                 <%- shopData.shop.notes_html %>
             <% }; %>
 
-            <br />
+            <hr class="my-4">
             <form action="/stores/add/<%= shopData.shop.id %>" method="POST">
                 <input hidden name="name" value="<%= shopData.shop.name %>">
                 <input hidden name="city" value="<%= shopData.shop.city %>">
                 <input hidden name="state" value="<%= shopData.shop.state.name %>">
                 <input hidden name="ravId" value="<%= shopData.shop.id %>">
-                <input type="submit" value="Add to my list">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="far fa-heart mr-2" href="#"></i>
+                    Add to my list
+                </button>
             </form>
         </div>
-        
     </div>
-    <div class="col-2"></div>
 </div>
-
-
-
