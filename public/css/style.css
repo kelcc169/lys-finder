@@ -21,6 +21,7 @@
 #note-input { 
     width: calc(100% - 72px);
 }
+
 .search-input { 
     position: fixed;
     z-index: 100;
@@ -84,6 +85,10 @@ p.contact {
 .mapboxgl-popup {
     max-width: 400px;
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.location-list {
+    position: relative;
 }
 
 body {
