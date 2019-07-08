@@ -120,7 +120,11 @@ router.put('/:id', function (req, res) {
             }
         }).then( function (data) {
             res.redirect('/profile/list')
+        }).catch(function (error) {
+            res.send('after location found:' + error);
         });
+    }).catch(function (error) {
+        res.send(error)
     });
 });
 

@@ -12,47 +12,51 @@
 
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="saved" role="tabpanel" aria-labelledby="saved-tab">
-        <div class="mb-5">
-            <% locations.forEach(function(location) { %>
-                <% if (!location.favorite.visited) { %>
-                    <div class="card m-2"><p>
-                        <div class="card-body">
-                            <h4 class="card-title"><%= location.name %></h4>
-                            <p class="card-subtitle text-muted mb-2"><%= location.city %>, <%= location.state %></p>
-                            <a href="../profile/<%= location.ravId %>">Store Info</a>
+        <div class="card-deck mb-5">
+                <% locations.forEach(function(location) { %>
+                    <% if (!location.favorite.visited) { %>
+                        <div class="card m-2 list-cards"><p>
+                            <div class="card-body">
+                                <h4 class="card-title"><%= location.name %></h4>
+                                <p class="card-subtitle text-muted mb-2"><%= location.city %>, <%= location.state %></p>
+                                <a href="../profile/<%= location.ravId %>">Store Info</a>
+                            </div>
                         </div>
-                    </div>
-                <% } %>
-            <% }); %>
+                    <% } %>
+                <% }); %>
         </div>
     </div>
 
     <div class="tab-pane fade" id="visited" role="tabpanel" aria-labelledby="visited-tab">
         <div class="mb-5">
-            <% locations.forEach(function(location) { %>
-                <% if (location.favorite.visited === true) { %>
-                    <div class="card m-2"><p>
+            <div class="card-deck">
+                <% locations.forEach(function(location) { %>
+                    <% if (location.favorite.visited === true) { %>
+                        <div class="card m-2 list-cards"><p>
+                            <div class="card-body">
+                                <h4 class="card-title"><%= location.name %></h4>
+                                <p class="card-subtitle text-muted mb-2"><%= location.city %>, <%= location.state %></p>                        
+                                <a href="../profile/<%= location.ravId %>">Store Info</a>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
+        <div class="mb-5">
+            <div class="card-deck">
+                <% locations.forEach(function(location) { %>
+                    <div class="card m-2 list-cards"><p>
                         <div class="card-body">
                             <h4 class="card-title"><%= location.name %></h4>
                             <p class="card-subtitle text-muted mb-2"><%= location.city %>, <%= location.state %></p>                        
                             <a href="../profile/<%= location.ravId %>">Store Info</a>
                         </div>
                     </div>
-                <% } %>
-            <% }); %>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
-        <div class="mb-5">
-            <% locations.forEach(function(location) { %>
-                <div class="card m-2"><p>
-                    <div class="card-body">
-                        <h4 class="card-title"><%= location.name %></h4>
-                        <p class="card-subtitle text-muted mb-2"><%= location.city %>, <%= location.state %></p>                        
-                        <a href="../profile/<%= location.ravId %>">Store Info</a>
-                    </div>
-                </div>
-            <% }); %>
+                <% }); %>
+            </div>
         </div>
     </div>
 </div>

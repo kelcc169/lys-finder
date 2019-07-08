@@ -91,6 +91,16 @@ p.contact {
     position: relative;
 }
 
+.nav-tabs .nav-link.active {
+    background-color: transparent;
+    border-bottom-color: #f8f9fa;
+}
+
+.list-cards {
+    min-width: 32%;
+    max-width: 32%;
+}
+
 body {
     margin-top: 69px;
 }
