@@ -102,29 +102,24 @@ router.post('/:id/notes', function (req, res) {
 });
 
 // PUT /profile/:id - update store to "visited"
-router.put('/:id', function (req, res) {
+router.put('/update/:id', function (req, res) {
     let ravId = parseInt(req.params.id);
 
-    //find record in favorites
     db.location.findOne({
         where: {
             ravId: ravId
         }
     }).then(function (location) {
         db.favorite.update({
-            visited: true
-        }, {
-            where: {
-                locationId: location.id,
-                userId: req.user.id
-            }
+                    visited: true
+                }, {
+                where: {
+                    locationId: location.id,
+                    userId: req.user.id
+                }
         }).then( function (data) {
-            res.redirect('/profile/list')
-        }).catch(function (error) {
-            res.send('after location found:' + error);
+            res.redirect('/profile')
         });
-    }).catch(function (error) {
-        res.send(error)
     });
 });
 
