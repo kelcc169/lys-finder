@@ -62,11 +62,48 @@ I planned these out after I knew what my models and API data would be.
 | PUT   | `/profile/:id/update` | `mark a store as "visited"` |
 | DELETE| `/profile/:id` | `remove store from user's saved stores` |
 
-## Process
-More information coming soon
+## Thoughts
+
+- I definitely thought I would need more views than I did. I made more than I needed and then pared down once the routes were functional, making sure that if I changed a page I changed the route to render or redirect to the right place.
+
+- clickable points on the map was the most difficult thing to achieve. I looked through the documentation for the Mapbox API, but the parts that I needed to know ended up being in two separate examples in the documentation that needed to be cobbled together.
+
+- JOIN TABLES were not my friend (at first). I chose to link comments by the primary key from my join table (usersLocations). In Sequelize, when you get information directly from a join table it does not send the primary key, so it couldn't find any comments. The first solution was to copy the id information from the migration into the model for my usersLocations table. That allowed me to access the primary key. Then it blew up again. Sequelize turns all model names singular when referencing a primary key, so it turned every "usersLocationsId" into "usersLocationId". The easiest solution was to make a new table with a singular name, include the id information in the model, and try again. Thus, usersLocations became favorites! Suddenly, my route worked! Huzzah!
+
+```js
+router.get('/:id', function (req, res) {
+    let ravId = parseInt(req.params.id)
+    let apiUrl = 'https://api.ravelry.com/shops/' + ravId + '.json?include=schedules'
+    let headers = {
+        'Authorization': 'Basic ' + Buffer.from(`${process.env.APIUSER}:${process.env.APIPASS}`).toString('base64')
+    };
+
+    db.location.findOne({
+        where: {ravId: ravId}
+    }).then( function (location) {
+        db.favorite.findOne({
+            where: {
+                locationId: location.id,
+                userId: req.user.id
+            }
+        }).then(function (favorite) {
+            db.comment.findAll({
+                where: {
+                    favoriteId: favorite.id
+                }
+            }).then( function (comments) {
+                axios.get(apiUrl, {headers} ).then( function(response) {
+                    let shopData = response.data
+                    res.render('profile/show', { shopData, comments, favorite })
+                });
+            });
+        });
+    });
+});
+```
 
 ## Known Problems
-- depending on the notes_html coming from the API, there are occasionally broken images that are not being rendered into the page correctly.
+- depending on the notes_html coming from the API, there are occasionally broken images that are not being rendered into the page correctly. They're using relative paths to render them on Ravelry, but they won't work on another site.
 
 ## Future Additions/Edits
 - [ ] if no user is logged in, the favorite button is invisible when the search page renders
@@ -74,3 +111,4 @@ More information coming soon
 - [ ] display specific hours the store is open, if information is available
 - [ ] complete map of all stores saved by user
 - [ ] ability for user to edit their own profile (name, email, change password...)
+- [ ] review system to prioritize better stores on the list

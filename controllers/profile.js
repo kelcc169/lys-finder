@@ -73,7 +73,6 @@ router.post('/add/:id', function (req, res) {
 
 // POST /notes - add note to location record
 router.post('/:id/notes', function (req, res) {
-    //find location
     let ravId = parseInt(req.params.id);
     db.location.findOne({
         where: {ravId: ravId}
