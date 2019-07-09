@@ -106,9 +106,21 @@ router.get('/:id', function (req, res) {
 - depending on the notes_html coming from the API, there are occasionally broken images that are not being rendered into the page correctly. They're using relative paths to render them on Ravelry, but they won't work on another site.
 
 ## Future Additions/Edits
+- [ ] make it more responsive!
 - [ ] if no user is logged in, the favorite button is invisible when the search page renders
 - [ ] display brands recently purchased at the store
 - [ ] display specific hours the store is open, if information is available
 - [ ] complete map of all stores saved by user
 - [ ] ability for user to edit their own profile (name, email, change password...)
 - [ ] review system to prioritize better stores on the list
+
+## Additional Screenshots
+
+### Map Popup
+![popupu](public/img/map-popup.png)
+### Store View from Search
+![store](public/img/store-view-1.png)
+### Profile View
+![profile](public/img/profile-view.png)
+### Store View from Profile
+![store2](public/img/store-view-2.png)
