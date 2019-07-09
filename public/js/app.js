@@ -91,11 +91,8 @@ geoJson.features.forEach(function (feature) {
     var ravId = feature.geometry.coordinates.ravId;
 
     var description = '<h6>' + name + '</h6><p>' + address + '</p><a href="search/' + ravId + '">Learn More</a>'
-    
-    el.addEventListener('click', function () {
-        console.log(feature)
-    });
-    
+
+    // create the popup
     var popup = new mapboxgl.Popup({ offset: 25 })
         .setHTML(description);
 
@@ -104,6 +101,4 @@ geoJson.features.forEach(function (feature) {
         .setLngLat(feature.geometry.coordinates)
         .setPopup(popup)
         .addTo(map)
-})
-
-
+});
