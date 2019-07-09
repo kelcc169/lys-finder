@@ -2,7 +2,7 @@
 
 Search your neighborhood for local yarn stores!
 
-Check it out [here]()!
+Check it out [here](https://frozen-badlands-61852.herokuapp.com/)!
 
 ![search](/public/img/search-view.png)
 
@@ -13,9 +13,9 @@ Check it out [here]()!
 - [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/)
 
 ### Libraries Used
- - NodeJS
- - Express
- - Bootstrap
+- NodeJS
+- Express
+- Bootstrap
 
 ### Dependencies
 Mapbox, Axios, Postgres, Sequelize...
