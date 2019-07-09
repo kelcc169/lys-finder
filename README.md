@@ -2,9 +2,12 @@
 
 Search your neighborhood for local yarn stores!
 
+Check it out [here]()!
+
 ![search](/public/img/search-view.png)
 
 ## Resources
+
 ### APIS
 - [Ravelry API](https://www.ravelry.com/api)
 - [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/)
@@ -17,6 +20,11 @@ Search your neighborhood for local yarn stores!
 ### Dependencies
 Mapbox, Axios, Postgres, Sequelize...
 For a complete list, please see the package.json. 
+
+### Additional Resources
+- [Font Awesome](https://fontawesome.com/) for nearly all icons.
+- [Flat Icon](https://www.flaticon.com/) and [smalllikeart]("https://www.flaticon.com/authors/smalllikeart" title="smalllikeart") for the yarn ball icon used on the map.
+- [stackoverflow](https://stackoverflow.com/)
 
 ## Design
 
@@ -33,7 +41,6 @@ I started with a general idea of what I wanted to create: a search page and a ge
 The next thing that I focused on was what sort of data I'd want to save and what would be better to call from the API I decided to use. Looking at the information I got back from the API, I didn't need to save a ton of that information to my databases; it would be better to leave things like addresses out and call the API when I needed them.
 
 ![models](/public/img/models.png)
-
 
 ### Routes
 I planned these out after I knew what my models and API data would be.
@@ -56,7 +63,7 @@ I planned these out after I knew what my models and API data would be.
 | DELETE| `/profile/:id` | `remove store from user's saved stores` |
 
 ## Process
-
+More information coming soon
 
 ## Known Problems
 - depending on the notes_html coming from the API, there are occasionally broken images that are not being rendered into the page correctly.
