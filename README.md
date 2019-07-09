@@ -20,7 +20,7 @@ The next thing that I focused on was what sort of data I'd want to save and what
 
 ### Routes
 |METHOD| ROUTE| FUNCTION|
-|:-----|:----:|
+|:-----|:----:|:------:|
 | GET   | `/` | `general search page` |
 | GET   | `/auth/signup` | `render sign-in page` |
 | GET   | `/auth/login` | `render login page` |
