@@ -26,7 +26,7 @@
                         <form action="/profile/add/<%= shop.id %>" method="POST" class="heart">
                             <input hidden name="name" value="<%= shop.name %>">
                             <input hidden name="city" value="<%= shop.city %>">
-                            <input hidden name="state" value="<%= shop.state.name %>">
+                            <input hidden name="state" value="<%= shop.country.name %>">
                             <input hidden name="ravId" value="<%= shop.id %>">
                             <button type="submit" class="btn btn-primary m-2">
                                 <i class="far fa-heart" href="#"></i>

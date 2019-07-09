@@ -132,7 +132,9 @@ router.delete('/:id', function (req, res) {
                 userId: req.user.id
             }
         }).then(function (data) {
-            res.redirect('/profile/list')
+            res.redirect('/profile')
+        }).catch( function (error) {
+            res.send(error)
         });
     });
 });

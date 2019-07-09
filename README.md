@@ -104,6 +104,7 @@ router.get('/:id', function (req, res) {
 
 ## Known Problems
 - depending on the notes_html coming from the API, there are occasionally broken images that are not being rendered into the page correctly. They're using relative paths to render them on Ravelry, but they won't work on another site.
+- errors on locations outside the US.
 
 ## Future Additions/Edits
 - [ ] make it more responsive!
@@ -113,6 +114,7 @@ router.get('/:id', function (req, res) {
 - [ ] complete map of all stores saved by user
 - [ ] ability for user to edit their own profile (name, email, change password...)
 - [ ] review system to prioritize better stores on the list
+- [ ] add ability to search saved places by location
 
 ## Additional Screenshots
 
