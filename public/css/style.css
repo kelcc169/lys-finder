@@ -107,6 +107,10 @@ p.contact {
     right: 4px;
 }
 
+.mapboxgl-popup {
+    max-width: 100px;
+}   
+
 body {
     margin-top: 69px;
 }
